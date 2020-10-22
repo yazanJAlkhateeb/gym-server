@@ -1,6 +1,7 @@
 package com.dna.gym.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Subscriber {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

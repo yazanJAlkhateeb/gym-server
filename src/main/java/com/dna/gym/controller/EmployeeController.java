@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class EmployeeController {
     @Autowired
@@ -41,11 +41,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/create-subscriber")
-    public Subscriber createSubscriber(@Valid @RequestBody Subscriber subscriber) {
+    public Subscriber createSubscriber(@RequestBody Subscriber subscriber) {
         return subscribersRepository.save(subscriber);
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/update-subscriber/{id}")
     public ResponseEntity<Subscriber> updateEmployee(@PathVariable(value = "id") Long subscriberId,
                                                      @Valid @RequestBody Subscriber subscriberDetails) throws ResourceNotFoundException {
         Subscriber subscriber = subscribersRepository.findById(subscriberId)
@@ -53,12 +53,14 @@ public class EmployeeController {
 
         subscriber.setEndOfSubscription(subscriberDetails.getEndOfSubscription());
         subscriber.setStartOfSubscription(subscriberDetails.getStartOfSubscription());
+        subscriber.setSubscriberId(subscriberDetails.getSubscriberId());
         subscriber.setFirstName(subscriberDetails.getFirstName());
+
         final Subscriber updatedSubscriber = subscribersRepository.save(subscriber);
         return ResponseEntity.ok(updatedSubscriber);
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/delete-subscriber/{id}")
     public Map<String, Boolean> deleteSubscriber(@PathVariable(value = "id") Long subscriberId)
             throws ResourceNotFoundException {
         Subscriber subscriber = subscribersRepository.findById(subscriberId)
