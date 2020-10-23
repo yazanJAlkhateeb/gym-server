@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -21,6 +23,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping(value = "/subscriber")
 public class SubscribersController {
     @Autowired
     private SubscribersRepository subscribersRepository;
@@ -30,11 +33,19 @@ public class SubscribersController {
         return subscribersRepository.findAll();
     }
 
-    @GetMapping("/subscriber/{id}")
-    public ResponseEntity<Subscriber> getSubscriberById(@PathVariable(value = "id") Long subscriberId)
+    @GetMapping("/{id}")
+    public ResponseEntity<Subscriber> getById(@PathVariable(value = "id") Long subscriberId)
             throws ResourceNotFoundException {
         Subscriber subscriber = subscribersRepository.findById(subscriberId)
                 .orElseThrow(() -> new ResourceNotFoundException("Subscriber not found for this id :: " + subscriberId));
+        return ResponseEntity.ok().body(subscriber);
+    }
+
+    @GetMapping("/subscriberId")
+    public ResponseEntity<Subscriber> getSubscriberById(@RequestParam String subscriberId)
+            throws ResourceNotFoundException {
+        Subscriber subscriber = subscribersRepository.findBySubscriberId(subscriberId);
+                //.orElseThrow(() -> new ResourceNotFoundException("Subscriber not found for this id :: " + subscriberId));
         return ResponseEntity.ok().body(subscriber);
     }
 
