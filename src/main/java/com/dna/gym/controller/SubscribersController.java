@@ -63,7 +63,8 @@ public class SubscribersController {
         subscriber.setEndOfSubscription(subscriberDetails.getEndOfSubscription());
         subscriber.setStartOfSubscription(subscriberDetails.getStartOfSubscription());
         subscriber.setSubscriberId(subscriberDetails.getSubscriberId());
-        subscriber.setFirstName(subscriberDetails.getFirstName());
+        subscriber.setName(subscriberDetails.getName());
+        subscriber.setImage(subscriberDetails.getImage());
 
         final Subscriber updatedSubscriber = subscribersRepository.save(subscriber);
         return ResponseEntity.ok(updatedSubscriber);

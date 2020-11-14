@@ -9,26 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import java.io.File;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Subscriber {
+public class SubscriberMeasurements {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String name;
-    private String email;
-    private String phoneNumber;
-    private String address;
     private String subscriberId;
-    private LocalDate startOfSubscription;
-    private LocalDate endOfSubscription;
-    @Lob
-    @Column(length = 1000)
-    private String image;
+    private String height;
+    private String weight;
+    private String chest;
+    private String shoulders;
+    private String arms;
+    private String stomach;
+    private String pelvis;
+    private String thigh;
+    private LocalDate date;
+
 }
