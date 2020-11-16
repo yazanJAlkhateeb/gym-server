@@ -9,9 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import java.io.File;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -28,6 +26,8 @@ public class Subscriber {
     private String subscriberId;
     private LocalDate startOfSubscription;
     private LocalDate endOfSubscription;
+    private BigDecimal totalSubscriptionAmount;
+    private BigDecimal paidSubscriptionAmount;
     @Lob
     @Column(length = 1000)
     private String image;

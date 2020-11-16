@@ -55,19 +55,12 @@ public class SubscribersController {
     }
 
     @PutMapping("/update-subscriber/{id}")
-    public ResponseEntity<Subscriber> updateSubscriber(@PathVariable(value = "id") Long subscriberId,
+    public void updateSubscriber(@PathVariable(value = "id") Long subscriberId,
                                                        @Valid @RequestBody Subscriber subscriberDetails) throws ResourceNotFoundException {
         Subscriber subscriber = subscribersRepository.findById(subscriberId)
                 .orElseThrow(() -> new ResourceNotFoundException("Subscriber not found for this id :: " + subscriberId));
 
-        subscriber.setEndOfSubscription(subscriberDetails.getEndOfSubscription());
-        subscriber.setStartOfSubscription(subscriberDetails.getStartOfSubscription());
-        subscriber.setSubscriberId(subscriberDetails.getSubscriberId());
-        subscriber.setName(subscriberDetails.getName());
-        subscriber.setImage(subscriberDetails.getImage());
-
-        final Subscriber updatedSubscriber = subscribersRepository.save(subscriber);
-        return ResponseEntity.ok(updatedSubscriber);
+        subscribersRepository.save(subscriberDetails);
     }
 
     @DeleteMapping("/delete-subscriber/{id}")
