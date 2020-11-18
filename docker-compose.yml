@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  pg-secure-zone:
+    container_name: gym
+    image: postgres
+    ports:
+      - 5436:5432
+    environment:
+      - POSTGRES_USER=gym
+      - POSTGRES_PASSWORD=gym
+      - POSTGRES_DB=gym
+volumes:
+  pgedge:
+    driver: local

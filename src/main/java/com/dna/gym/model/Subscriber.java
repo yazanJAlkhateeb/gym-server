@@ -2,8 +2,8 @@ package com.dna.gym.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +29,6 @@ public class Subscriber {
     private BigDecimal totalSubscriptionAmount;
     private BigDecimal paidSubscriptionAmount;
     @Lob
-    @Column(length = 1000)
+    @Type(type = "text")
     private String image;
 }
